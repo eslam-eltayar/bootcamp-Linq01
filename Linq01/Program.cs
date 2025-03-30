@@ -1,4 +1,8 @@
 ﻿using Linq01;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using static Linq01.ListGenerator;
 internal class Program
@@ -124,7 +128,7 @@ internal class Program
         //} 
         #endregion
 
-
+        #region Select - Select Many
         // Test on Data Setup
 
         //Console.WriteLine(ListGenerator.ProductsList[0]);
@@ -184,15 +188,443 @@ internal class Program
 
         // Select as Anonymous Type
 
-        var result = ProductsList.Select(p => new { Id = p.ProductID, Price = p.UnitPrice * .8m });
+        //var result = ProductsList.Select(p => new { Id = p.ProductID, Price = p.UnitPrice * .8m });
 
 
-        foreach (var item in result)
-        {
-            Console.WriteLine(item);
-        }
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);
+        //} 
+        #endregion
+
+        #region Ordering Operators [Asc - Dsc]
+
+        /// Order By Asc
+
+        //var result = ProductsList.Select(p => new { p.ProductName, p.UnitsInStock })
+        //                         .OrderBy(p => p.UnitsInStock);
+
+        /// Order By Dcs
+
+        //var result = ProductsList.Select(p => new { p.ProductName, p.UnitsInStock })
+        //                         .OrderByDescending(p => p.UnitsInStock);
+
+        /// Order By Mulipule Columns
+
+        //var result = ProductsList.OrderBy(p => p.UnitsInStock)
+        //                         .ThenBy(p => p.UnitPrice);
 
 
 
+        //var result = ProductsList.OrderBy(p => p.UnitsInStock)
+        //                         .ThenByDescending(p => p.UnitPrice);
+
+
+        //var result = ProductsList.OrderBy(p => p.UnitsInStock)
+        //                         .OrderByDescending(p => p.UnitPrice).Take(4);
+
+        /// Reverse Method ()
+
+        //var result = ProductsList.OrderBy(p => p.UnitsInStock)
+        //                        .OrderByDescending(p => p.UnitPrice).Take(4).Reverse();
+
+
+        #endregion
+
+        #region Elements Operator - Immediate Execution [Valid Only With Fluent Syntax]
+
+        /// First - Last
+
+
+        // var result = ProductsList.First();
+
+        //var result = ProductsList.Last();
+
+        //List<Product> products = new List<Product>(); // Empty list 
+
+        /// FirstOrDefault - LastOrDefault
+
+        //var result = products.FirstOrDefault();
+
+        //if(result == null)
+        //    Console.WriteLine("Null");
+        //else
+        //    Console.WriteLine(result);
+
+        /// Element At
+
+        //var result = ProductsList.ElementAt(1);
+
+        /// ElementAtOrDefault
+
+        //var result = ProductsList.ElementAtOrDefault(200);
+
+        //if (result == null)
+        //    Console.WriteLine("Null");
+        //else
+        //    Console.WriteLine(result);
+
+
+        /// Single 
+        /// 
+
+        // List<Product> products = new List<Product>();
+
+        //products.Add(ProductsList[0]);
+
+        //var result = ProductsList.SingleOrDefault();
+        // if Seqence is Empty => returns Null
+        // if sequence contains just only one element => returns element 
+        // if sequence contains more than one element 
+
+
+        //if (result == null)
+        //    Console.WriteLine("Null");
+        //else
+        //    Console.WriteLine(result);
+
+        //Console.WriteLine(result);
+
+        #endregion
+
+        #region  Aggregate Operators  - Immediate Execution
+
+        /// Count()
+
+        //var result = ProductsList.Count();
+
+        //var result = ProductsList.Count(p => p.UnitsInStock == 0);
+
+        /// Max
+
+        //var result = ProductsList.Max();
+
+        //var result = ProductsList.Min();
+
+        /// Sum
+
+        //var result = ProductsList.Sum(p => p.UnitPrice);
+
+        //var result = ProductsList.Average(p => p.UnitPrice);
+
+        /// Aggregate
+
+        //string[] names = { "Ahmed", "Ali", "Eslam", "Hassan" };
+
+        //var result = names.Aggregate((string01, string02) => $"{string01} // {string02}");
+
+        //Console.WriteLine(result);
+
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);
+        //}
+
+        #endregion
+
+
+        #region Casting [Conversion] Operators - Immediate Execution
+
+        //List<Product> result = ProductsList.Where(p => p.UnitsInStock == 0).ToList(); // To List
+
+        //Product[] result = ProductsList.Where(p => p.UnitsInStock == 0).ToArray(); // To Array
+
+        //Dictionary<long, Product> result = ProductsList.Where(p => p.UnitsInStock == 0).ToDictionary(p => p.ProductID);
+
+        //Dictionary<long, string> result = ProductsList.Where(p => p.UnitsInStock == 0).ToDictionary(p => p.ProductID, p => p.ProductName);
+
+        //HashSet<Product> result = ProductsList.Where(p => p.UnitsInStock == 0).ToHashSet(); // To HashSet
+
+
+        /// OfType<>
+
+        //ArrayList obj = new ArrayList()
+        //{
+        //    "Omar",
+        //    "Eslam",
+        //    "Hassan",
+        //    1,
+        //    2,
+        //    3,
+        //    'H',
+        //    'V'
+        //};
+
+        //var result = obj.OfType<char>(); 
+
+
+        #endregion
+
+
+        #region Generation Operators - Deferred Execution
+
+        // Valid with Fluent Syntax only 
+        // The Only Way To Call Them is As Static Methods from Enumerable Class
+
+        /// Range()
+
+        //var result = Enumerable.Range(0, 100); // 0 .. 99
+
+        /// Repeat()
+
+        //var result = Enumerable.Repeat(1, 5);
+
+        //var result = Enumerable.Repeat(ProductsList[0], 5);
+
+        //var arrayProduct = Enumerable.Empty<Product>();
+
+        //Product[] empty = [];
+
+        // Both will Generate Empty Array of Product
+
+
+
+        #endregion
+
+        #region Set Operators [Union Family] - Deferred Execution
+
+        //var sec01 = Enumerable.Range(0, 100);
+        //var sec02 = Enumerable.Range(50, 149);
+
+        //var result = sec01.Union(sec02); // WithOut Duplication 
+
+        //var result = sec01.Concat(sec02); // With Duplication 
+
+        //var result = sec01.Intersect(sec02); // Return Elements in 1st Sequence and Exist in 2nd Sequence 
+
+        //var result = sec01.Except(sec02);
+        //var result = sec02.Except(sec01);
+
+        // var result = sec01.Concat(sec02); // With Duplication 
+
+        // var uniqueResult = result.Distinct();
+
+        //Console.WriteLine("\n--------------------------------Seq01------------------------------------------");
+
+
+        //foreach (var item in sec01)
+        //{
+        //    Console.Write($"{item} ");
+        //}
+
+        //Console.WriteLine("\n---------------------------------Seq02-----------------------------------------");
+
+        //foreach (var item in sec02)
+        //{
+        //    Console.Write($"{item} ");
+        //}
+
+        //Console.WriteLine("\n----------------------------------Result----------------------------------------");
+
+        //foreach (var item in result)
+        //{
+        //    Console.Write($"{item} ");
+
+        //}
+
+        //Console.WriteLine("\n----------------------------------Unique Result----------------------------------------");
+
+        //foreach (var item in uniqueResult)
+        //{
+        //    Console.Write($"{item} ");
+
+        //}
+
+
+        #endregion
+
+        #region Quantifier Operator - Return boolean
+
+        /// Any => If Sequence contains at least one Element Will Return True
+
+        //var result = ProductsList.Any(p => p.UnitPrice == 0);
+
+        /// All => If All Elements in Sequence Match Condition Will Return True 
+
+        //var result = ProductsList.All(p => p.UnitsInStock >= 0);
+
+        /// SequenceEqual => If Two Sequences are Equal Will Return True 
+
+        //var sec01 = Enumerable.Range(0, 100);
+        //var sec02 = Enumerable.Range(0, 101);
+
+        //var result = sec01.SequenceEqual(sec02);
+
+        //Console.WriteLine(result); // True or False 
+        #endregion
+
+        #region Zipping Operator - ZIP
+
+        //string[] names = { "Omar", "Ahmed", "Zeyad", "Eslam" };
+        //int[] numbers = { 1, 2, 3 };
+        //char[] chars = { 'a', 'b' };
+
+        ////var result = names.Zip(chars);
+
+        ////var result = names.Zip(numbers,chars);
+
+        //var result = names.Zip(numbers, (name, number) => new { Index = number, Name = name });
+
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);
+        //}
+
+        #endregion
+
+        #region Grouping Operators
+
+        //Get Products Grouped by Category
+
+        /// Query Synatx
+
+        //var result = from p in ProductsList
+        //             group p by p.Category;
+
+        /// Fluent Syntax 
+
+        // var result = ProductsList.GroupBy(p => p.Category);
+
+        //Get Products in Stock Grouped by Category
+
+        // Query Syntax
+
+        //var result = from p in ProductsList
+        //             where p.UnitsInStock > 0
+        //             group p by p.Category;
+
+        // Fluent Syntax
+
+        //var result = ProductsList.Where(p => p.UnitsInStock > 0).GroupBy(p => p.Category);
+
+        // Get Products in Stock Grouped by Category That Contains More Than 10 Product
+
+        /// Query Syntax
+
+        //var result = from p in ProductsList
+        //             where p.UnitsInStock > 0
+        //             group p by p.Category
+        //             into Categories
+        //             where Categories.Count() > 10
+        //             select Categories;
+
+
+        /// Fluent Syntax
+
+        //var result = ProductsList.Where(p => p.UnitsInStock > 0)
+        //                         .GroupBy(p => p.Category)
+        //                         .Where(p => p.Count() > 10);
+
+
+        // Get Category Name of Products in Stock That Contains More Than 10 Product and Number of Product In Each Category
+
+        /// Fluent Syntax
+
+        //var result = ProductsList.Where(p => p.UnitsInStock > 0)
+        //                         .GroupBy(p => p.Category)
+        //                         .Where(p => p.Count() > 10)
+        //                         .Select(x => new
+        //                         {
+        //                             CategoryName = x.Key,
+        //                             ProductCount = x.Count(),
+        //                         });
+
+
+        /// Query Syntax
+
+        //var result = from p in ProductsList
+        //             where p.UnitsInStock > 0
+        //             group p by p.Category
+        //             into Categories
+        //             where Categories.Count() > 10
+        //             select new
+        //             {
+        //                 CategoryName = Categories.Key,
+        //                 ProductCount = Categories.Count(),
+        //             };
+
+
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);
+        //}
+
+        #endregion
+
+        #region Partitioning Operators [Pagination Operators]
+        /// Take => Take Number of Elements From First Only 
+
+        //var result = ProductsList.Take(7);
+
+        /// Skip => Skip Number of Elements From First And Get Rest Of Elements
+
+        //var result = ProductsList.Where(p => p.UnitsInStock > 0).Skip(5);
+
+
+        /// TakeLast => Take Number of Elements From Last Only
+
+        // var result = ProductsList.TakeLast(7);
+
+        //var result = ProductsList.SkipLast(7);
+
+        /// TakeWhile => Take Elements Till Element That do not Match Condition
+
+        // int[] numbers = { 5, 7, 9, 2, 8, 3, 0, 10, 25, 4 };
+
+        //var result = numbers.TakeWhile(num => num % 2 == 1);
+
+        /// SkipWhile => Skip Elements Till Element That do not Match Condition
+
+        //var result = numbers.SkipWhile(num => num % 2 == 1);
+
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);
+        //}
+
+
+
+
+
+        #endregion
+
+        #region Let and Into [Valid With Query Syntax Only]
+
+        /// into => Restart Query With Introducing A new Range 
+
+        // List<string> names = new List<string> { "Omar", "Ali", "Eslam", "Aya", "Hassan" };
+
+        // A , O , U , I , E
+
+        //var result = from N in names
+        //             select Regex.Replace(N, "[AOUIEaoiea]", string.Empty)
+        //             into NonVowel
+        //             where NonVowel.Length > 3
+        //             select NonVowel;
+
+
+        // let => Continue Query With Added A new Range
+
+        //var result = from N in names
+        //             let NonVowel = Regex.Replace(N, "[AOUIEaoiea]", string.Empty)
+        //             where NonVowel.Length > 3
+        //             select NonVowel; 
+
+
+        //foreach (var item in result)
+        //{
+        //    Console.WriteLine(item);   
+        //}
+        #endregion
+
+        //foreach (var category in result)
+        //{
+        //    Console.WriteLine(category.Key);
+
+        //    foreach (var product in category)
+        //    {
+        //        Console.WriteLine($"                        {product.ProductName}  -  {product.Category} -  {product.UnitsInStock}");
+        //    }
+        //}
     }
 }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Linq01
 {
-    class Product /*: IComparable<Product>*/
+    class Product : IComparable<Product>
     {
         public long ProductID { get; set; }
         public string ProductName { get; set; }
         public string Category { get; set; }
         public decimal UnitPrice { get; set; }
         public int UnitsInStock { get; set; }
+
+        public int CompareTo(Product? other)
+       => this.ProductID.CompareTo(other?.ProductID);
 
         //public int CompareTo(Product? other)
         //{
